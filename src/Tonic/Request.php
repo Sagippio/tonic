@@ -16,6 +16,8 @@ class Request
     public $acceptLang = array();
     public $ifMatch = array();
     public $ifNoneMatch = array();
+    
+    public $lastPart;
 
     /**
      * Map of file/URI extensions to mimetypes
@@ -126,10 +128,10 @@ class Request
 
         // get mimetype
         $parts = explode('/', rtrim($uri, '/'));
-        $lastPart = array_pop($parts);
+        $this->lastPart = array_pop($parts);
         $uri = join('/', $parts);
 
-        $parts = explode('.', $lastPart);
+        $parts = explode('.', $this->lastPart);
         $firstPart = array_shift($parts);
         $uri .= '/'.$firstPart;
 
